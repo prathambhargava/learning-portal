@@ -1,4 +1,4 @@
-package com.example.LearningPortal.Controller;
+package com.example.LearningPortal.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.LearningPortal.Entity.Course;
-import com.example.LearningPortal.Service.CategoryService;
-import com.example.LearningPortal.Service.CourseService;
-import com.example.LearningPortal.Service.EnrollmentService;
-import com.example.LearningPortal.Service.FavoriteService;
-import com.example.LearningPortal.Service.UserService;
+import com.example.LearningPortal.entity.Course;
+import com.example.LearningPortal.service.CategoryService;
+import com.example.LearningPortal.service.CourseService;
+import com.example.LearningPortal.service.EnrollmentService;
+import com.example.LearningPortal.service.FavoriteService;
+import com.example.LearningPortal.service.UserService;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -55,7 +55,8 @@ public class LearningPortalController {
 
 	@GetMapping("/course/{id}")
 	public ResponseEntity<Course> getCourseById(@PathVariable Long id) {
-		Optional<Course> course = Optional.ofNullable(courseService.getCourseById(id));
+		Optional<Course> course = Optional
+				.ofNullable(courseService.getCourseById(id));
 		return course.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
 				.orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
 	}
@@ -67,8 +68,10 @@ public class LearningPortalController {
 	}
 
 	@PutMapping("/course/update/{id}")
-	public ResponseEntity<Course> updateCourse(@PathVariable Long id, @RequestBody Course course) {
-		Optional<Course> existingCourse = Optional.ofNullable(courseService.getCourseById(id));
+	public ResponseEntity<Course> updateCourse(@PathVariable Long id,
+			@RequestBody Course course) {
+		Optional<Course> existingCourse = Optional
+				.ofNullable(courseService.getCourseById(id));
 		if (existingCourse.isPresent()) {
 			Course updatedCourse = courseService.updateCourse(id, course);
 			return new ResponseEntity<>(updatedCourse, HttpStatus.OK);

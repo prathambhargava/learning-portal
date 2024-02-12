@@ -1,11 +1,11 @@
-package com.example.LearningPortal.Mapper;
+package com.example.LearningPortal.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-import com.example.LearningPortal.DTO.FavoriteDTO;
-import com.example.LearningPortal.Entity.Favorite;
+import com.example.LearningPortal.dto.FavoriteDTO;
+import com.example.LearningPortal.entity.Favorite;
 
 @Mapper(componentModel = "spring")
 public interface FavoriteMapper {

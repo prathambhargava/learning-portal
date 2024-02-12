@@ -1,10 +1,10 @@
-package com.example.LearningPortal.Mapper;
+package com.example.LearningPortal.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-import com.example.LearningPortal.DTO.CategoryDTO;
-import com.example.LearningPortal.Entity.Category;
+import com.example.LearningPortal.dto.CategoryDTO;
+import com.example.LearningPortal.entity.Category;
 
 @Mapper(componentModel = "spring")
 public interface CategoryMapper {

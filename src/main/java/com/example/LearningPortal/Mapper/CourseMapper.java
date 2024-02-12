@@ -1,11 +1,11 @@
-package com.example.LearningPortal.Mapper;
+package com.example.LearningPortal.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-import com.example.LearningPortal.DTO.CourseDTO;
-import com.example.LearningPortal.Entity.Course;
+import com.example.LearningPortal.dto.CourseDTO;
+import com.example.LearningPortal.entity.Course;
 
 @Mapper(componentModel = "spring", uses = { CategoryMapper.class, UserMapper.class })
 public interface CourseMapper {
