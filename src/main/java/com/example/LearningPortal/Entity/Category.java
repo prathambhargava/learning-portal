@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "category")
-public class Category {
+public class category {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +28,7 @@ public class Category {
 	private String name;
 
 	@OneToMany(mappedBy = "category")
-	private List<Course> courses;
+	private List<course> courses;
 
 	@Column(name = "created_on")
 	private LocalDateTime createdOn;

@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "users")
-public class User {
+public class user {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,13 +31,13 @@ public class User {
 	private String password;
 
 	@Enumerated(EnumType.STRING)
-	private UserRoleEnum role;
+	private userRoleEnum role;
 
 	@OneToMany(mappedBy = "author")
-	private List<Course> authoredCourses;
+	private List<course> authoredCourses;
 
 	@OneToMany(mappedBy = "learner")
-	private List<Enrollment> enrollments;
+	private List<enrollment> enrollments;
 
 	@Column(name = "created_on")
 	private LocalDateTime createdOn;

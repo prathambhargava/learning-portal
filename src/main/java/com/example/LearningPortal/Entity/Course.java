@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Course {
+public class course {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,17 +30,17 @@ public class Course {
 
 	@ManyToOne
 	@JoinColumn(name = "author_id")
-	private User author;
+	private user author;
 
 	@ManyToOne
 	@JoinColumn(name = "category_id")
-	private Category category;
+	private category category;
 
 	@OneToMany(mappedBy = "course")
-	private List<Enrollment> enrollments;
+	private List<enrollment> enrollments;
 
 	@OneToMany(mappedBy = "course")
-	private List<Favorite> favourites;
+	private List<favorite> favourites;
 
 	@Column(name = "created_on")
 	private LocalDateTime createdOn;

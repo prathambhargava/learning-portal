@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.LearningPortal.entity.Course;
-import com.example.LearningPortal.service.CategoryService;
-import com.example.LearningPortal.service.CourseService;
-import com.example.LearningPortal.service.EnrollmentService;
-import com.example.LearningPortal.service.FavoriteService;
-import com.example.LearningPortal.service.UserService;
+import com.example.LearningPortal.entity.course;
+import com.example.LearningPortal.service.categoryService;
+import com.example.LearningPortal.service.courseService;
+import com.example.LearningPortal.service.enrollmentService;
+import com.example.LearningPortal.service.favoriteService;
+import com.example.LearningPortal.service.userService;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,50 +30,50 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api")
-public class LearningPortalController {
+public class learningPortalController {
 
 	@Autowired
-	private UserService userService;
+	private userService userService;
 
 	@Autowired
-	private CourseService courseService;
+	private courseService courseService;
 
 	@Autowired
-	private CategoryService categoryService;
+	private categoryService categoryService;
 
 	@Autowired
-	private EnrollmentService enrollmentService;
+	private enrollmentService enrollmentService;
 
 	@Autowired
-	private FavoriteService favoriteService;
+	private favoriteService favoriteService;
 
 	@GetMapping("/courses")
-	public ResponseEntity<List<Course>> getAllCourses() {
-		List<Course> courses = courseService.getAllCourses();
+	public ResponseEntity<List<course>> getAllCourses() {
+		List<course> courses = courseService.getAllCourses();
 		return new ResponseEntity<>(courses, HttpStatus.OK);
 	}
 
 	@GetMapping("/course/{id}")
-	public ResponseEntity<Course> getCourseById(@PathVariable Long id) {
-		Optional<Course> course = Optional
+	public ResponseEntity<course> getCourseById(@PathVariable Long id) {
+		Optional<course> course = Optional
 				.ofNullable(courseService.getCourseById(id));
 		return course.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
 				.orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
 	}
 
 	@PostMapping("/course/create")
-	public ResponseEntity<Course> createCourse(@RequestBody Course course) {
-		Course createdCourse = courseService.createCourse(course);
+	public ResponseEntity<course> createCourse(@RequestBody course course) {
+		course createdCourse = courseService.createCourse(course);
 		return new ResponseEntity<>(createdCourse, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/course/update/{id}")
-	public ResponseEntity<Course> updateCourse(@PathVariable Long id,
-			@RequestBody Course course) {
-		Optional<Course> existingCourse = Optional
+	public ResponseEntity<course> updateCourse(@PathVariable Long id,
+			@RequestBody course course) {
+		Optional<course> existingCourse = Optional
 				.ofNullable(courseService.getCourseById(id));
 		if (existingCourse.isPresent()) {
-			Course updatedCourse = courseService.updateCourse(id, course);
+			course updatedCourse = courseService.updateCourse(id, course);
 			return new ResponseEntity<>(updatedCourse, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

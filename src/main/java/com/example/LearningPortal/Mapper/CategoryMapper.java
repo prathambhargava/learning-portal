@@ -3,16 +3,16 @@ package com.example.LearningPortal.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-import com.example.LearningPortal.dto.CategoryDTO;
-import com.example.LearningPortal.entity.Category;
+import com.example.LearningPortal.dto.categoryDTO;
+import com.example.LearningPortal.entity.category;
 
 @Mapper(componentModel = "spring")
-public interface CategoryMapper {
+public interface categoryMapper {
 
-	CategoryMapper INSTANCE = Mappers.getMapper(CategoryMapper.class);
+	categoryMapper INSTANCE = Mappers.getMapper(categoryMapper.class);
 
-	CategoryDTO categoryToCategoryDTO(Category category);
+	categoryDTO categoryToCategoryDTO(category category);
 
-	Category categoryDTOToCategory(CategoryDTO categoryDTO);
+	category categoryDTOToCategory(categoryDTO categoryDTO);
 
 }

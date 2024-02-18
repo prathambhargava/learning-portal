@@ -4,17 +4,17 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-import com.example.LearningPortal.dto.UserDTO;
-import com.example.LearningPortal.entity.User;
+import com.example.LearningPortal.dto.userDTO;
+import com.example.LearningPortal.entity.user;
 
 @Mapper(componentModel = "spring")
-public interface UserMapper {
+public interface userMapper {
 
-	UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
+	userMapper INSTANCE = Mappers.getMapper(userMapper.class);
 
 	@Mapping(source = "user.role", target = "role")
-	UserDTO userToUserDTO(User user);
+	userDTO userToUserDTO(user user);
 
-	User userDTOToUser(UserDTO userDTO);
+	user userDTOToUser(userDTO userDTO);
 
 }

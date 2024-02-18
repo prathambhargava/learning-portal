@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Enrollment {
+public class enrollment {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,11 +25,11 @@ public class Enrollment {
 
 	@ManyToOne
 	@JoinColumn(name = "learner_id")
-	private User learner;
+	private user learner;
 
 	@ManyToOne
 	@JoinColumn(name = "course_id")
-	private Course course;
+	private course course;
 
 	@Column(name = "created_on")
 	private LocalDateTime createdOn;

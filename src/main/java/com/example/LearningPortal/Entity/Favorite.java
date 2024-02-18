@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "favourite")
-public class Favorite {
+public class favorite {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,11 +27,11 @@ public class Favorite {
 
 	@ManyToOne
 	@JoinColumn(name = "learner_id")
-	private User learner;
+	private user learner;
 
 	@ManyToOne
 	@JoinColumn(name = "course_id")
-	private Course course;
+	private course course;
 
 	@Column(name = "created_on")
 	private LocalDateTime createdOn;

@@ -1,6 +1,6 @@
 package com.example.LearningPortal.entity;
 
-public enum UserRoleEnum {
+public enum userRoleEnum {
 
 	// UserRole Enum
 	ADMIN, AUTHOR, LEARNER

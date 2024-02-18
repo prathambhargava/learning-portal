@@ -5,23 +5,23 @@ import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.LearningPortal.entity.Enrollment;
-import com.example.LearningPortal.repo.EnrollmentRepository;
+import com.example.LearningPortal.entity.enrollment;
+import com.example.LearningPortal.repo.enrollmentRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class EnrollmentService {
+public class enrollmentService {
 
 	@Autowired
-	private EnrollmentRepository enrollmentRepository;
+	private enrollmentRepository enrollmentRepository;
 
-	public Enrollment enrollment(Enrollment enrollment) {
+	public enrollment enrollment(enrollment enrollment) {
 
 		enrollment.setCreatedOn(LocalDateTime.now());
 		enrollment.setUpdatedOn(LocalDateTime.now());
-		Enrollment savedEnrollment = enrollmentRepository.save(enrollment);
+		enrollment savedEnrollment = enrollmentRepository.save(enrollment);
 		log.info("Enrollment saved Successfully: {}", savedEnrollment);
 
 		return savedEnrollment;

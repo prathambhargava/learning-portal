@@ -5,27 +5,27 @@ import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.LearningPortal.entity.User;
-import com.example.LearningPortal.repo.UserRepository;
+import com.example.LearningPortal.entity.user;
+import com.example.LearningPortal.repo.userRepository;
 
 import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
-public class UserService {
+public class userService {
 
 	@Autowired
-	private UserRepository userRepository;
+	private userRepository userRepository;
 
-	public User saveUser(User user) {
+	public user saveUser(user user) {
 		user.setCreatedOn(LocalDateTime.now());
 		user.setUpdatedOn(LocalDateTime.now());
-		User savedUser = userRepository.save(user);
+		user savedUser = userRepository.save(user);
 		log.info("Saved User : {}", savedUser);
 		return savedUser;
 
 	}
 
-	public User getUserById(long userId) {
+	public user getUserById(long userId) {
 		return userRepository.findById(userId).orElse(null);
 	}
 

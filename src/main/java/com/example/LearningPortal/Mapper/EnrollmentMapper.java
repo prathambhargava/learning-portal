@@ -4,18 +4,18 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-import com.example.LearningPortal.dto.EnrollmentDTO;
-import com.example.LearningPortal.entity.Enrollment;
+import com.example.LearningPortal.dto.enrollmentDTO;
+import com.example.LearningPortal.entity.enrollment;
 
-@Mapper(componentModel = "spring", uses = { UserMapper.class, CourseMapper.class })
+@Mapper(componentModel = "spring", uses = { userMapper.class, courseMapper.class })
 
-public interface EnrollmentMapper {
+public interface enrollmentMapper {
 
-	EnrollmentMapper INSTANCE = Mappers.getMapper(EnrollmentMapper.class);
+	enrollmentMapper INSTANCE = Mappers.getMapper(enrollmentMapper.class);
 
 	@Mapping(source = "enrollment.learner.userId", target = "learnerId")
-	EnrollmentDTO enrollmentToEnrollmentDTO(Enrollment enrollment);
+	enrollmentDTO enrollmentToEnrollmentDTO(enrollment enrollment);
 
-	Enrollment enrollmentDTOToEnrollment(EnrollmentDTO enrollmentDTO);
+	enrollment enrollmentDTOToEnrollment(enrollmentDTO enrollmentDTO);
 
 }

@@ -7,8 +7,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.LearningPortal.entity.Course;
-import com.example.LearningPortal.repo.CourseRepository;
+import com.example.LearningPortal.entity.course;
+import com.example.LearningPortal.repo.courseRepository;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,50 +20,50 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 @Service
 @Slf4j
-public class CourseService {
+public class courseService {
 
 	@Autowired
-	private CourseRepository courseRepository;
+	private courseRepository courseRepository;
 
-	public Course saveCourse(Course course) {
+	public course saveCourse(course course) {
 		log.info("Saving course: {}", course);
 		course.setCreatedOn(LocalDateTime.now());
 		course.setUpdatedOn(LocalDateTime.now());
-		Course savedCourse = courseRepository.save(course);
+		course savedCourse = courseRepository.save(course);
 		log.info("Course saved successfully: {}", savedCourse);
 		return savedCourse;
 	}
 
-	public Course getCourseById(long courseId) {
+	public course getCourseById(long courseId) {
 		log.info("Getting course by ID: {}", courseId);
-		Optional<Course> courseOptional = courseRepository.findById(courseId);
+		Optional<course> courseOptional = courseRepository.findById(courseId);
 
 		if (!courseOptional.isPresent()) {
 			log.warn("Course not found with ID: {}", courseId);
 			return null;
 		}
 
-		Course foundCourse = courseOptional.get();
+		course foundCourse = courseOptional.get();
 		log.info("Found course: {}", foundCourse);
 		return foundCourse;
 	}
 
-	public List<Course> getAllCourses() {
+	public List<course> getAllCourses() {
 		log.info("Getting all courses");
-		List<Course> courses = courseRepository.findAll();
+		List<course> courses = courseRepository.findAll();
 		log.info("Retrieved {} courses", courses.size());
 		return courses;
 	}
 
-	public Course updateCourse(Long id, Course course) {
+	public course updateCourse(Long id, course course) {
 		log.info("Updating course with ID {}: {}", id, course);
-		Optional<Course> courseOptional = courseRepository.findById(id);
+		Optional<course> courseOptional = courseRepository.findById(id);
 		if (!courseOptional.isPresent()) {
 			log.warn("Course not found with ID: {}", id);
 			return null;
 		}
 
-		Course updatedCourse = courseOptional.get();
+		course updatedCourse = courseOptional.get();
 
 		String title = (course.getTitle() == null)
 				? updatedCourse.getTitle()
@@ -75,14 +75,14 @@ public class CourseService {
 		updatedCourse.setTitle(title);
 		updatedCourse.setDescription(description);
 
-		Course savedUpdatedCourse = courseRepository.save(updatedCourse);
+		course savedUpdatedCourse = courseRepository.save(updatedCourse);
 		log.info("Course updated successfully: {}", savedUpdatedCourse);
 		return savedUpdatedCourse;
 	}
 
-	public Course createCourse(Course course) {
+	public course createCourse(course course) {
 		log.info("Creating course: {}", course);
-		Course createdCourse = courseRepository.save(course);
+		course createdCourse = courseRepository.save(course);
 		log.info("Course created successfully: {}", createdCourse);
 		return createdCourse;
 	}

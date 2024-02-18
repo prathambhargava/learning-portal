@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class FavoriteDTO {
+public class favoriteDTO {
 
 	private long favoriteId;
 	private long learnerId;
