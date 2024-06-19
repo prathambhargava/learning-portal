@@ -4,20 +4,13 @@ pipeline {
     options {
         buildDiscarder(logRotator(numToKeepStr: '5'))
     }
-    
-    environment {
-        // Fetch SONAR_HOST_URL and SONAR_AUTH_TOKEN from Jenkins credentials
-        SONAR_HOST_URL = credentials('SONAR_HOST_URL')
-        SONAR_AUTH_TOKEN = credentials('SONAR_AUTH_TOKEN')
-    }
-    
     stages {
         stage('Scan') {
             steps {
                 script {
                     // Use the retrieved environment variables
                     withSonarQubeEnv('Sonarqube') { 
-                        sh "./mvnw clean verify sonar:sonar -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_AUTH_TOKEN}"
+                        sh "./mvnw clean verify sonar:sonar "
                     }
                 }
             }
