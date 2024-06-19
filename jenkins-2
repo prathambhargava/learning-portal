@@ -3,3 +3,34 @@ mvn clean verify sonar:sonar \
   -Dsonar.projectName='learning portal' \
   -Dsonar.host.url=http://98.70.57.4:9000 \
   -Dsonar.token=sqp_a3fcc538f3211ef0c3a23858ac769325fcab4183
+
+
+
+pipeline {
+    agent any
+
+    environment {
+        SONAR_HOST_URL = 'http://98.70.57.4:9000'
+        SONAR_LOGIN = 'admin'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/prathambhargava/learning-portal.git'
+            }
+        }
+
+        stage('SonarQube analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh "sonar-scanner \
+                        -Dsonar.projectKey=your-project-key \
+                        -Dsonar.sources=. \
+                        -Dsonar.host.url=${env.SONAR_HOST_URL} \
+                        -Dsonar.login=${env.SONAR_LOGIN}"
+                }
+            }
+        }
+    }
+}
