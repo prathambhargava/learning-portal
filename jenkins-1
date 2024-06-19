@@ -1,10 +1,10 @@
-pipeline {
+ipeline {
   agent any
   options {
     buildDiscarder(logRotator(numToKeepStr: '5'))
 }
 environment{
-        SONAR_HOST_URL = credentials('http:\\98.70.57.4:9000\')
+        SONAR_HOST_URL = credentials('http://98.70.57.4:9000/')
         SONAR_AUTH_TOKEN = credentials('learning')
 }
   stages {
@@ -13,7 +13,7 @@ environment{
         withSonarQubeEnv('Sonarqube') { 
           // Add a step to make mvnw executable
           sh 'chmod +x ./mvnw'
-          sh './mvnw clean verify sonar:sonar'
+          sh "./mvnw clean verify sonar:sonar -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_AUTH_TOKEN}"
         }
       }
     }
