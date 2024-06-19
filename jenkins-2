@@ -5,7 +5,6 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    // Example steps
                     echo 'Checking out code...'
                     checkout([$class: 'GitSCM', branches: [[name: 'main']], userRemoteConfigs: [[url: 'https://github.com/prathambhargava/learning-portal.git']]])
                 }
@@ -22,7 +21,6 @@ pipeline {
         stage('SonarQube analysis') {
             steps {
                 script {
-                    // Example steps
                     withSonarQubeEnv('SonarQube') {
                         sh 'sonar-scanner \
                             -Dsonar.projectKey=learning-portal \
