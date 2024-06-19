@@ -1,44 +1,22 @@
 pipeline {
     agent any
-
-    tools {
-        maven 'Maven3' // Ensure this matches the name configured in Global Tool Configuration
+    
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '5'))
     }
-
+    
     environment {
-        SONARQUBE_ENV = 'SonarQube' // Ensure this matches the name configured in SonarQube servers
+        SONAR_HOST_URL = http://98.70.57.4:9000
+        SONAR_AUTH_TOKEN = sqp_a3fcc538f3211ef0c3a23858ac769325fcab4183
     }
-
+    
     stages {
-        stage('Checkout') {
+        stage('Scan') {
             steps {
-                checkout scm
-            }
-        }
-        stage('Build') {
-            steps {
-                script {
-                    try {
-                        sh 'mvn clean compile'
-                    } catch (Exception e) {
-                        echo "Build failed but proceeding to SonarQube analysis."
-                    }
+                withSonarQubeEnv('Sonarqube') { 
+                    sh './mvnw clean verify sonar:sonar'
                 }
             }
-        }
-        stage('SonarQube analysis') {
-            steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh 'mvn sonar:sonar'
-                }
-            }
-        }
-    }
-
-    post {
-        always {
-            junit '**/target/surefire-reports/*.xml'
-            archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
         }
     }
 }
