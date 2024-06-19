@@ -1,0 +1,5 @@
+mvn clean verify sonar:sonar \
+  -Dsonar.projectKey=learning-portal \
+  -Dsonar.projectName='learning portal' \
+  -Dsonar.host.url=http://98.70.57.4:9000 \
+  -Dsonar.token=sqp_a3fcc538f3211ef0c3a23858ac769325fcab4183
