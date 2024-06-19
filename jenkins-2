@@ -1,28 +1,25 @@
 pipeline {
     agent any
     
-    environment {
-        SONAR_HOST_URL = 'http://98.70.57.4:9000'
-        // Add other environment variables as needed
-    }
-    
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/prathambhargava/learning-portal.git'
+                checkout([$class: 'GitSCM', 
+                    branches: [[name: 'main']],
+                    userRemoteConfigs: [[url: 'https://github.com/prathambhargava/learning-portal.git']]
+                )
             }
         }
         
         stage('SonarQube analysis') {
             steps {
                 script {
-                    def scannerHome = tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
                     withSonarQubeEnv('SonarQube') {
-                        sh "${scannerHome}/bin/sonar-scanner \
-                            -Dsonar.projectKey=your-project-key \
+                        sh 'sonar-scanner \
+                            -Dsonar.projectKey=learning-portal \
                             -Dsonar.sources=. \
-                            -Dsonar.host.url=${env.SONAR_HOST_URL} \
-                            -Dsonar.login=${env.SONAR_LOGIN}"
+                            -Dsonar.host.url=http://98.70.57.4:9000 \
+                            -Dsonar.login=admin'
                     }
                 }
             }
