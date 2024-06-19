@@ -3,12 +3,17 @@ pipeline {
   options {
     buildDiscarder(logRotator(numToKeepStr: '5'))
   }
+  environment {
+    SONAR_HOST_URL = credentials('SONAR_HOST_URL')
+    SONAR_AUTH_TOKEN = credentials('SONAR_AUTH_TOKEN')
+  }
   stages {
     stage('Scan') {
       steps {
-        withSonarQubeEnv(installationName: 'Sonarqube') {
-          sh'chmod +x ./mvnw'
-          sh './mvnw clean sonar:sonar'
+        withSonarQubeEnv('Sonarqube') { 
+          // Add a step to make mvnw executable
+          sh 'chmod +x ./mvnw'
+          sh './mvnw clean verify sonar:sonar'
         }
       }
     }
