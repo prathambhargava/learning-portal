@@ -1,21 +1,28 @@
 pipeline {
-  agent any
-  options {
-    buildDiscarder(logRotator(numToKeepStr: '5'))
-}
-environment{
+    agent any
+    
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '5'))
+    }
+    
+    environment {
         SONAR_HOST_URL = credentials('http://98.70.57.4:9000/')
         SONAR_AUTH_TOKEN = credentials('learning')
-}
-  stages {
-    stage('Scan') {
-      steps {
-        withSonarQubeEnv('Sonarqube') { 
-          // Add a step to make mvnw executable
-          sh 'chmod +x ./mvnw'
-          sh "./mvnw clean verify sonar:sonar -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_AUTH_TOKEN}"
-        }
-      }
     }
-  }
+    
+    stages {
+        stage('Scan') {
+            steps {
+                script {
+                    // Ensure mvnw script is executable
+                    sh 'chmod +x ./mvnw'
+                    
+                    // Execute Maven with SonarQube analysis
+                    withSonarQubeEnv('Sonarqube') {
+                        sh "./mvnw clean verify sonar:sonar -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_AUTH_TOKEN}"
+                    }
+                }
+            }
+        }
+    }
 }
