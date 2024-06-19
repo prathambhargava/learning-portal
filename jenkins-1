@@ -4,7 +4,7 @@ pipeline {
     buildDiscarder(logRotator(numToKeepStr: '5'))
 }
 environment{
-        SONAR_HOST_URL = credentials('http://98.70.57.4:9000/')
+        SONAR_HOST_URL = credentials('http:\\98.70.57.4:9000\')
         SONAR_AUTH_TOKEN = credentials('learning')
 }
   stages {
