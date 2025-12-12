@@ -1,0 +1,39 @@
+name: Azure Hello World
+
+on:
+  workflow_dispatch:
+
+jobs:
+  hello-world:
+    runs-on: US9704-SSC-ReSourcesLAI-Dev-MG-GitHub-LinuxRunner-01
+
+    permissions:
+      id-token: write      # Needed for Azure OIDC login
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Ensure Azure CLI is installed
+        shell: bash
+        run: |
+          if ! command -v az >/dev/null 2>&1; then
+            echo "Installing Azure CLI..."
+            curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+          fi
+          az version
+
+      - name: Azure Login using OIDC
+        uses: azure/login@v2
+        with:
+          tenant-id: ${{ vars.TENANT_ID }}
+          client-id: ${{ vars.CLIENT_ID }}
+          subscription-id: ${{ vars.SUBSCRIPTION_ID }}
+
+      - name: Print Hello World in Azure CLI context
+        shell: bash
+        run: |
+          echo "Logged into Azure. Now printing message..."
+          echo "hello - world"
+          echo "::notice title=Result::hello - world printed successfully"
